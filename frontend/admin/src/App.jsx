@@ -1,8 +1,12 @@
-import React from 'react'
+
+
+import Home from './pages/hom.jsx'
 
 const App = () => {
   return (
-    <div>App</div>
+    <>
+      <Home />
+    </>
   )
 }
 
