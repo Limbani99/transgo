@@ -5,13 +5,17 @@ import Register from './auth/Register'
 import Login from './auth/Login'
 import Home from './pages/Home'
 import Service from './pages/Service'
+import About from './pages/About'
+import Contact from './pages/Contact'
 function App() {
   return (
     <>
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
-          <Route path='/service' element={<Service/>}></Route>
+          <Route path='/services' element={<Service/>}></Route>
+          <Route path='/about' element={<About/>}></Route>
+          <Route path='/contact' element={<Contact/>}></Route>
         </Route>
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
