@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
 const navLinks = [
-  { label: 'Home', href: '/' },
-  { label: 'Services', href: '/services' },
-  { label: 'About', href: '/about' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'Home', to: '/' },
+  { label: 'Service', to: '/service' },
+  { label: 'About', to: '/about' },
+  { label: 'Contact', to: '/contact' },
 ]
 
 function Navbar() {
