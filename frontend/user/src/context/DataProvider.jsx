@@ -6,13 +6,14 @@ const DataProvider = ({ children }) => {
   const [userData, setUserData] = useState(null);
   const [role, setRole] = useState(null);
   const [token, setToken] = useState(null);
-
+  const [isLoginedIn, setIsLoggedIn] = useState(false);
   const login = (userData, authtoken) => {
     localStorage.setItem("token", authtoken);
     localStorage.setItem("user", JSON.stringify(userData));
     setUserData(userData);
     setRole(userData.role);
     setToken(authtoken);
+    setIsLoggedIn(true);
   };
 
   const logout = () => {
@@ -21,6 +22,7 @@ const DataProvider = ({ children }) => {
     setUserData(null);
     setRole(null);
     setToken(null);
+    setIsLoggedIn(false);
   };
 
   useEffect(() => {
@@ -31,10 +33,12 @@ const DataProvider = ({ children }) => {
       setToken(storedToken);
       setUserData(JSON.parse(storedUser));
       setRole(savedRole);
+      setIsLoggedIn(true);
     } else {
       setToken(null);
       setUserData(null);
       setRole(null);
+      setIsLoggedIn(false);
     }
   }, []);
 
@@ -56,6 +60,7 @@ const DataProvider = ({ children }) => {
     token,
     login,
     logout,
+    isLoginedIn,
   };
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
