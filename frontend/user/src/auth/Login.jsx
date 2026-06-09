@@ -1,7 +1,35 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import toast from 'react-hot-toast';
 
 function Login() {
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  });
+  const navigate = useNavigate();
+  const onChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(formData);
+    try {
+      const res = await axios.post('http://localhost:5000/api/users/login', formData);
+      console.log(res.data);
+      toast.success('Login successful!');
+      navigate('/');
+    }
+    catch (error) {
+      console.error('Login error:', error);
+      toast.error('Login failed!');
+    }
+
+    // Handle form submission logic here (e.g., send data to backend)
+  }
   return (
     <div className="min-h-screen bg-slate-100 py-8 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto flex min-h-[calc(100vh-64px)] max-w-7xl overflow-hidden rounded-[2rem] bg-white shadow-[0_40px_120px_rgba(15,23,42,0.15)]">
@@ -23,7 +51,7 @@ function Login() {
               <p className="mt-3 text-sm text-slate-500">Sign in to your account to continue to TransGo.</p>
             </div>
 
-            <form className="space-y-5">
+            <form className="space-y-5" onSubmit={handleSubmit}>
               <div>
                 <label className="mb-2 block text-sm font-medium text-slate-700">Email Address</label>
                 <div className="relative">
@@ -31,6 +59,8 @@ function Login() {
                   <input
                     type="email"
                     placeholder="john@example.com"
+                    name="email"
+                    onChange={onChange}
                     className="w-full rounded-2xl border border-slate-200 bg-slate-50 py-3 pl-11 pr-4 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
                   />
                 </div>
@@ -43,6 +73,8 @@ function Login() {
                   <input
                     type="password"
                     placeholder="••••••••"
+                    name="password"
+                    onChange={onChange}
                     className="w-full rounded-2xl border border-slate-200 bg-slate-50 py-3 pl-11 pr-4 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
                   />
                 </div>
