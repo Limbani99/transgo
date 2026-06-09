@@ -8,6 +8,8 @@ import Service from './pages/Service'
 import About from './pages/About'
 import Contact from './pages/Contact'
 import DashBoard from './pages/UserPages/DashBoard'
+import Shipment from './pages/UserPages/Shipment'
+import Tranpoter from './pages/UserPages/Tranpoter'
 function App() {
   return (
     <>
@@ -21,6 +23,8 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<DashBoard />} />
+        <Route path="/shipments" element={<Shipment />} />
+        <Route path="/marketplace" element={<Tranpoter />} />
       </Routes>
     </>
   )
