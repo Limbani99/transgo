@@ -18,7 +18,7 @@ function Sidebar() {
   return (
     <>
     {isLoginedIn ? (
-        <aside className="w-64 bg-white border-r border-slate-100 flex flex-col justify-between p-6 shrink-0 sticky top-0 h-screen z-30">
+        <aside className="w-64 bg-white border-r border-slate-100 flex flex-col justify-between p-6 shrink-0 sticky top-[65px] h-[calc(100vh-65px)] z-30 overflow-y-auto">
         <div className="space-y-8">
           {/* Logo Branding */}
          
