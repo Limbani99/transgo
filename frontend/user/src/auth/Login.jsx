@@ -5,13 +5,16 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useData } from '../context/DataProvider';
+
 function Login() {
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
+
   const { login } = useData();
   const navigate = useNavigate();
+
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   }
