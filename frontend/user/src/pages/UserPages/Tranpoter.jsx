@@ -123,52 +123,10 @@ function Tranpoter() {
   }
 
   return (
-    <div className="bg-[#f8fafc] min-h-screen font-sans text-slate-700 flex flex-col">
+    <div className="flex flex-1 min-h-0 bg-slate-50/50 gap-8">
       
-      {/* 1. TOP HEADER */}
-      <header className="flex items-center justify-between py-4 px-8 border-b border-slate-100 bg-white sticky top-0 z-20">
-        {/* Left Logo */}
-        <div className="flex items-center gap-3">
-          <p className="text-xl font-bold text-slate-900">TransGo</p>
-        </div>
-
-        {/* Center Tabs */}
-        <nav className="flex items-center gap-8">
-          <a href="/dashboard" className="text-xs font-semibold text-slate-500 hover:text-slate-900 transition">
-            Dashboard
-          </a>
-          <a href="/marketplace" className="text-xs font-bold text-blue-600 border-b-2 border-blue-600 pb-4 mt-4 transition">
-            Marketplace
-          </a>
-          <a href="/tracking" className="text-xs font-semibold text-slate-500 hover:text-slate-900 transition">
-            Tracking
-          </a>
-          <a href="/history" className="text-xs font-semibold text-slate-500 hover:text-slate-900 transition">
-            History
-          </a>
-        </nav>
-
-        {/* Right Icons */}
-        <div className="flex items-center gap-4">
-          <button className="p-1.5 text-slate-500 hover:bg-slate-50 rounded-lg transition duration-150">
-            <Bell className="w-4.5 h-4.5" />
-          </button>
-          <button className="p-1.5 text-slate-500 hover:bg-slate-50 rounded-lg transition duration-150">
-            <Settings className="w-4.5 h-4.5" />
-          </button>
-          <img 
-            src={teamMarcus} 
-            alt="User Profile" 
-            className="w-8 h-8 rounded-full border border-yellow-500 object-cover" 
-          />
-        </div>
-      </header>
-
-      {/* Main split view container */}
-      <div className="flex flex-1">
-        
-        {/* 2. LEFT FILTERS SIDEBAR */}
-        <aside className="w-64 bg-white border-r border-slate-100 flex flex-col justify-between p-6 shrink-0 h-[calc(100vh-68px)] sticky top-[68px] z-10">
+      {/* 2. LEFT FILTERS SIDEBAR */}
+      <aside className="w-64 bg-white border border-slate-100 rounded-3xl flex flex-col justify-between p-6 shrink-0 h-[calc(100vh-140px)] sticky top-[96px] z-10 hover:shadow-sm transition duration-200">
           <div className="space-y-8">
             {/* Sidebar title */}
             <div>
@@ -397,8 +355,6 @@ function Tranpoter() {
           )}
 
         </main>
-      </div>
-
     </div>
   )
 }
