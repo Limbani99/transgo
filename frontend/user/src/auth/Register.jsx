@@ -1,7 +1,41 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-
+import { useState } from 'react'
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 function Register() {
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    phone: '',
+    address: ''
+  });
+  const navigate = useNavigate();
+  const onChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  }
+  const handleSubmit = async (e) => {
+  
+    e.preventDefault();
+    if (formData.password !== formData.confirmPassword) {
+      toast.error('Passwords do not match!');
+      return;
+    }
+    try{
+      const {confirmPassword,...userData} = formData; // Exclude confirmPassword from the data sent to the backend
+   const res = await axios.post('http://localhost:5000/api/users/register', userData);
+   console.log(res.data);
+   toast.success('Registration successful!');
+   navigate('/login');
+    // Handle form submission logic here (e.g., send data to backend)
+  } catch (error) {
+    console.error('Registration error:', error);
+    toast.error('Registration failed!');
+  }}
+
   return (
     <div className="min-h-screen bg-slate-100 py-8 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto flex min-h-[calc(100vh-64px)] max-w-7xl overflow-hidden rounded-[2rem] bg-white shadow-[0_40px_120px_rgba(15,23,42,0.15)]">
@@ -25,7 +59,7 @@ function Register() {
               <p className="mt-3 text-sm text-slate-500">Get started with your free logistics dashboard today.</p>
             </div>
 
-            <form className="space-y-5">
+            <form className="space-y-5" onSubmit={handleSubmit}>
               <div>
                 <label className="mb-2 block text-sm font-medium text-slate-700">Full Name</label>
                 <div className="relative">
@@ -33,6 +67,8 @@ function Register() {
                   <input
                     type="text"
                     placeholder="John Doe"
+                    name="username"
+                    onChange={onChange}
                     className="w-full rounded-2xl border border-slate-200 bg-slate-50 py-3 pl-11 pr-4 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
                   />
                 </div>
@@ -45,6 +81,21 @@ function Register() {
                   <input
                     type="email"
                     placeholder="john@example.com"
+                    name="email"
+                    onChange={onChange}
+                    className="w-full rounded-2xl border border-slate-200 bg-slate-50 py-3 pl-11 pr-4 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
+                  />
+                </div>
+              </div>
+<div>
+                <label className="mb-2 block text-sm font-medium text-slate-700">Address</label>
+                <div className="relative">
+                  <span className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">✉️</span>
+                  <input
+                    type="text"
+                    placeholder="modasa,gujarat"
+                    name="address"
+                    onChange={onChange}
                     className="w-full rounded-2xl border border-slate-200 bg-slate-50 py-3 pl-11 pr-4 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
                   />
                 </div>
@@ -57,6 +108,8 @@ function Register() {
                   <input
                     type="tel"
                     placeholder="+1 (555) 000-0000"
+                    name="phone"
+                    onChange={onChange}
                     className="w-full rounded-2xl border border-slate-200 bg-slate-50 py-3 pl-11 pr-4 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
                   />
                 </div>
@@ -70,6 +123,8 @@ function Register() {
                     <input
                       type="password"
                       placeholder="••••••••"
+                      name="password"
+                      onChange={onChange} 
                       className="w-full rounded-2xl border border-slate-200 bg-slate-50 py-3 pl-11 pr-4 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
                     />
                   </div>
@@ -81,6 +136,8 @@ function Register() {
                     <input
                       type="password"
                       placeholder="••••••••"
+                      name="confirmPassword"
+                      onChange={onChange}
                       className="w-full rounded-2xl border border-slate-200 bg-slate-50 py-3 pl-11 pr-4 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
                     />
                   </div>
@@ -129,4 +186,4 @@ function Register() {
   )
 }
 
-export default Register
+export default Register;
