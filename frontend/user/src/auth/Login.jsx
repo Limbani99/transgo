@@ -4,12 +4,13 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import toast from 'react-hot-toast';
-
+import { useData } from '../context/DataProvider';
 function Login() {
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
+  const { login } = useData();
   const navigate = useNavigate();
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -19,6 +20,9 @@ function Login() {
     console.log(formData);
     try {
       const res = await axios.post('http://localhost:5000/api/users/login', formData);
+       const userData = res.data.user;
+      const authToken = res.data.token;
+      login(userData, authToken);
       console.log(res.data);
       toast.success('Login successful!');
       navigate('/');
