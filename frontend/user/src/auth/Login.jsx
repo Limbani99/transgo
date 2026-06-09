@@ -28,7 +28,7 @@ function Login() {
       login(userData, authToken);
       console.log(res.data);
       toast.success('Login successful!');
-      navigate('/');
+      navigate('/dashboard');
     }
     catch (error) {
       console.error('Login error:', error);
