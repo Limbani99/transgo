@@ -2,19 +2,12 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useData } from "../context/DataProvider";
 const navLinks = [
-<<<<<<< HEAD
-  { label: 'Home', to: '/' },
-  { label: 'Services', to: '/services' },
-  { label: 'About', to: '/about' },
-  { label: 'Contact', to: '/contact' },
-]
-=======
+
   { label: "Home", to: "/" },
   { label: "Service", to: "/services" },
   { label: "About", to: "/about" },
   { label: "Contact", to: "/contact" },
 ];
->>>>>>> f39cfaab32cb4a0bbad09755f7fd7975592acd3e
 
 function Navbar() {
   const navigation = useNavigate();
