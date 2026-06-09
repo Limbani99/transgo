@@ -1,5 +1,5 @@
-import React, { createContext } from "react";
-import { useState, useContext } from "react";
+import React, { createContext, useState, useContext, useEffect } from "react";
+import axios from "axios";
 export const DataContext = createContext();
 
 const DataProvider = ({ children }) => {
@@ -61,7 +61,12 @@ const DataProvider = ({ children }) => {
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
 };
 
+export default DataProvider;
+
 export const useData = () => {
   const context = useContext(DataContext);
+  if (!context) {
+    throw new Error('useData must be used within a DataProvider');
+  }
   return context;
 };
