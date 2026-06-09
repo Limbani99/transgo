@@ -1,8 +1,12 @@
 import React from 'react'
-
+import { useData } from '../context/DataProvider';
 function Footer() {
+  const { isLoginedIn } = useData();
   return (
-    <footer className="bg-slate-950 text-slate-300">
+    <>
+{
+    isLoginedIn ? (null):(
+      <footer className="bg-slate-950 text-slate-300">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-[1.5fr_repeat(3,1fr)]">
           <div>
@@ -66,6 +70,11 @@ function Footer() {
         </div>
       </div>
     </footer>
+    )
+}
+
+    </>
+   
   )
 }
 
