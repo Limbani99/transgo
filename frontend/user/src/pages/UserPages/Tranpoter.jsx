@@ -1,17 +1,17 @@
 import React, { useState } from 'react'
-import { 
-  Bell, 
-  Settings, 
-  Sliders, 
-  Truck, 
-  Navigation, 
-  CreditCard, 
-  HelpCircle, 
-  MessageSquare, 
-  Star, 
-  Check, 
-  Plane, 
-  Ship, 
+import {
+  Bell,
+  Settings,
+  Sliders,
+  Truck,
+  Navigation,
+  CreditCard,
+  HelpCircle,
+  MessageSquare,
+  Star,
+  Check,
+  Plane,
+  Ship,
   X,
   ShieldAlert
 } from 'lucide-react'
@@ -111,7 +111,7 @@ function Tranpoter() {
   const [selectedPartners, setSelectedPartners] = useState(['Global Swift Freight', 'Oceania Logistics'])
 
   const handleTogglePartner = (partnerName) => {
-    setSelectedPartners((prev) => 
+    setSelectedPartners((prev) =>
       prev.includes(partnerName)
         ? prev.filter(name => name !== partnerName)
         : [...prev, partnerName]
@@ -124,98 +124,14 @@ function Tranpoter() {
 
   return (
     <div className="bg-[#f8fafc] min-h-screen font-sans text-slate-700 flex flex-col">
-      
-      {/* 1. TOP HEADER */}
-      <header className="flex items-center justify-between py-4 px-8 border-b border-slate-100 bg-white sticky top-0 z-20">
-        {/* Left Logo */}
-        <div className="flex items-center gap-3">
-          <p className="text-xl font-bold text-slate-900">TransGo</p>
-        </div>
-
-        {/* Center Tabs */}
-        <nav className="flex items-center gap-8">
-          <a href="/dashboard" className="text-xs font-semibold text-slate-500 hover:text-slate-900 transition">
-            Dashboard
-          </a>
-          <a href="/marketplace" className="text-xs font-bold text-blue-600 border-b-2 border-blue-600 pb-4 mt-4 transition">
-            Marketplace
-          </a>
-          <a href="/tracking" className="text-xs font-semibold text-slate-500 hover:text-slate-900 transition">
-            Tracking
-          </a>
-          <a href="/history" className="text-xs font-semibold text-slate-500 hover:text-slate-900 transition">
-            History
-          </a>
-        </nav>
-
-        {/* Right Icons */}
-        <div className="flex items-center gap-4">
-          <button className="p-1.5 text-slate-500 hover:bg-slate-50 rounded-lg transition duration-150">
-            <Bell className="w-4.5 h-4.5" />
-          </button>
-          <button className="p-1.5 text-slate-500 hover:bg-slate-50 rounded-lg transition duration-150">
-            <Settings className="w-4.5 h-4.5" />
-          </button>
-          <img 
-            src={teamMarcus} 
-            alt="User Profile" 
-            className="w-8 h-8 rounded-full border border-yellow-500 object-cover" 
-          />
-        </div>
-      </header>
 
       {/* Main split view container */}
       <div className="flex flex-1">
-        
-        {/* 2. LEFT FILTERS SIDEBAR */}
-        <aside className="w-64 bg-white border-r border-slate-100 flex flex-col justify-between p-6 shrink-0 h-[calc(100vh-68px)] sticky top-[68px] z-10">
-          <div className="space-y-8">
-            {/* Sidebar title */}
-            <div>
-              <p className="text-sm font-bold text-slate-900 leading-tight">Marketplace Filters</p>
-              <p className="text-[10px] font-semibold text-slate-400 mt-1">Refine your logistics search</p>
-            </div>
 
-            {/* Sidebar navigation options */}
-            <nav className="space-y-1">
-              <button className="w-full flex items-center gap-3 py-2.5 px-4 rounded-xl text-xs font-bold tracking-wide transition duration-150 text-left bg-blue-600 text-white shadow-md shadow-blue-200">
-                <Sliders className="w-4 h-4" />
-                Filters
-              </button>
-              <button className="w-full flex items-center gap-3 py-2.5 px-4 rounded-xl text-xs font-semibold text-slate-500 hover:bg-slate-50 hover:text-slate-900 transition duration-150 text-left">
-                <Truck className="w-4 h-4" />
-                Fleet Type
-              </button>
-              <button className="w-full flex items-center gap-3 py-2.5 px-4 rounded-xl text-xs font-semibold text-slate-500 hover:bg-slate-50 hover:text-slate-900 transition duration-150 text-left">
-                <Navigation className="w-4 h-4" />
-                Transit Speed
-              </button>
-              <button className="w-full flex items-center gap-3 py-2.5 px-4 rounded-xl text-xs font-semibold text-slate-500 hover:bg-slate-50 hover:text-slate-900 transition duration-150 text-left">
-                <CreditCard className="w-4 h-4" />
-                Price Range
-              </button>
-            </nav>
-          </div>
-
-          {/* Bottom actions list */}
-          <div className="space-y-4">
-            <button className="w-full text-center py-2.5 bg-blue-600 hover:bg-blue-700 transition text-[10px] font-bold text-white rounded-xl tracking-wider uppercase shadow-md shadow-blue-200">
-              Compare Partners
-            </button>
-            <button className="w-full flex items-center gap-3 py-2 px-4 rounded-xl text-xs font-semibold text-slate-500 hover:bg-slate-50 hover:text-slate-900 transition">
-              <HelpCircle className="w-4 h-4" />
-              Help Center
-            </button>
-            <button className="w-full flex items-center gap-3 py-2 px-4 rounded-xl text-xs font-semibold text-slate-500 hover:bg-slate-50 hover:text-slate-900 transition">
-              <MessageSquare className="w-4 h-4" />
-              Contact Support
-            </button>
-          </div>
-        </aside>
 
         {/* 3. CORE CONTENT AREA */}
         <main className="flex-grow p-8 max-w-[1400px] mx-auto w-full space-y-8 overflow-y-auto relative">
-          
+
           {/* Header block */}
           <div>
             <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">Choose Transportation Partner</h1>
@@ -227,13 +143,12 @@ function Tranpoter() {
             {partnersData.map((partner) => {
               const isSelected = selectedPartners.includes(partner.name)
               return (
-                <div 
+                <div
                   key={partner.name}
-                  className={`bg-white border rounded-3xl p-6 shadow-sm flex flex-col justify-between hover:shadow-md transition relative ${
-                    isSelected ? 'border-blue-200 shadow-md ring-1 ring-blue-150 ring-opacity-50' : 'border-slate-100'
-                  }`}
+                  className={`bg-white border rounded-3xl p-6 shadow-sm flex flex-col justify-between hover:shadow-md transition relative ${isSelected ? 'border-blue-200 shadow-md ring-1 ring-blue-150 ring-opacity-50' : 'border-slate-100'
+                    }`}
                 >
-                  
+
                   {/* Top Row: Info & Checkbox */}
                   <div className="flex justify-between items-start gap-4 mb-6">
                     <div className="flex gap-4">
@@ -241,7 +156,7 @@ function Tranpoter() {
                       <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${partner.logoBg}`}>
                         <PartnerLogo type={partner.logoType} />
                       </div>
-                      
+
                       {/* Name & verification details */}
                       <div>
                         <div className="flex flex-wrap items-center gap-2">
@@ -250,7 +165,7 @@ function Tranpoter() {
                             Verified
                           </span>
                         </div>
-                        
+
                         <div className="flex items-center gap-1.5 text-xs text-slate-400 mt-1 font-medium">
                           <Star className="w-3.5 h-3.5 fill-amber-400 stroke-amber-450 text-amber-500" />
                           <span className="text-slate-800 font-bold">{partner.rating}</span>
@@ -261,13 +176,12 @@ function Tranpoter() {
                     </div>
 
                     {/* Custom Checkbox */}
-                    <div 
+                    <div
                       onClick={() => handleTogglePartner(partner.name)}
-                      className={`w-5 h-5 rounded border flex items-center justify-center cursor-pointer transition select-none ${
-                        isSelected 
-                          ? 'bg-blue-600 border-blue-600 text-white' 
-                          : 'bg-white border-slate-300 hover:border-slate-400'
-                      }`}
+                      className={`w-5 h-5 rounded border flex items-center justify-center cursor-pointer transition select-none ${isSelected
+                        ? 'bg-blue-600 border-blue-600 text-white'
+                        : 'bg-white border-slate-300 hover:border-slate-400'
+                        }`}
                     >
                       {isSelected && <Check className="w-3.5 h-3.5 stroke-[2.5]" />}
                     </div>
@@ -290,7 +204,7 @@ function Tranpoter() {
                     {partner.fleet.map((item) => {
                       const FleetIcon = item.icon
                       return (
-                        <span 
+                        <span
                           key={item.type}
                           className="inline-flex items-center gap-1.5 bg-slate-100/80 px-2.5 py-1 rounded-lg text-[9px] font-bold text-slate-500 uppercase tracking-wider border border-slate-200/20"
                         >
@@ -342,7 +256,7 @@ function Tranpoter() {
           {/* 4. BOTTOM FLOATING COMPARE BAR */}
           {selectedPartners.length > 0 && (
             <div className="fixed bottom-6 left-1/2 lg:left-[calc(50%+128px)] -translate-x-1/2 bg-white/95 backdrop-blur border border-slate-200/80 shadow-2xl p-4 rounded-3xl flex flex-col sm:flex-row items-center gap-4 sm:gap-6 z-40 max-w-[90%] sm:max-w-none">
-              
+
               {/* Selected stats info */}
               <div className="text-center sm:text-left">
                 <p className="text-xs font-bold text-blue-900">Compare Partners</p>
@@ -360,7 +274,7 @@ function Tranpoter() {
                       <div className={`w-6 h-6 rounded-lg flex items-center justify-center ${data.logoBg} scale-75 shrink-0`}>
                         <PartnerLogo type={data.logoType} />
                       </div>
-                      
+
                       {/* Cost Info */}
                       <div className="text-[10px]">
                         <p className="font-bold text-slate-900 leading-none">{name.split(' ')[0]}</p>
@@ -368,7 +282,7 @@ function Tranpoter() {
                       </div>
 
                       {/* Remove tag */}
-                      <button 
+                      <button
                         onClick={() => handleTogglePartner(name)}
                         className="text-slate-400 hover:text-slate-600 transition"
                       >
@@ -381,13 +295,13 @@ function Tranpoter() {
 
               {/* Action Buttons */}
               <div className="flex items-center gap-4 border-t sm:border-t-0 sm:border-l border-slate-100 pt-3 sm:pt-0 sm:pl-6 w-full sm:w-auto justify-between sm:justify-start">
-                <button 
+                <button
                   onClick={handleClearAll}
                   className="text-xs font-bold text-slate-450 text-slate-400 hover:text-slate-600 transition"
                 >
                   Clear All
                 </button>
-                
+
                 <button className="rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs py-2 px-4 shadow shadow-blue-200 transition">
                   Compare Partners Side-by-Side
                 </button>
