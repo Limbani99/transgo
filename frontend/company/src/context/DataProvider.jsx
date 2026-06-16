@@ -1,19 +1,22 @@
-import React from "react";
+import { createContext, useContext } from "react";
 
-const DataProvider = ({ children }) => {
+export const Data = createContext();
 
+export const DataProvider = ({ children }) => {
+    const value = {
+
+    }
 
     return (
-        <DataContext.Provider value={{}}>
+        <Data.Provider value={value}>
             {children}
-        </DataContext.Provider>
+        </Data.Provider>
     )
 }
 
+
+
 export const useData = () => {
-    const context = useContext(DataContext);
-    if (!context) {
-        throw new Error("useData must be used within a DataProvider")
-    }
+    const context = useContext(Data);
     return context;
-}
+};

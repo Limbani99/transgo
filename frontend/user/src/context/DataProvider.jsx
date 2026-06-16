@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, useEffect } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
 import axios from "axios";
 export const DataContext = createContext();
 
@@ -7,6 +7,7 @@ const DataProvider = ({ children }) => {
   const [role, setRole] = useState(null);
   const [token, setToken] = useState(null);
   const [isLoginedIn, setIsLoggedIn] = useState(false);
+  
   const login = (userData, authtoken) => {
     localStorage.setItem("token", authtoken);
     localStorage.setItem("user", JSON.stringify(userData));
