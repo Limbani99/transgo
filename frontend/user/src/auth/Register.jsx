@@ -25,7 +25,7 @@ function Register() {
       return;
     }
     try{
-      const {confirmPassword,...userData} = formData; // Exclude confirmPassword from the data sent to the backend
+      const {confirmPassword,...userData} = formData; 
    const res = await axios.post('http://localhost:5000/api/users/register', userData);
    console.log(res.data);
    toast.success('Registration successful!');
@@ -68,6 +68,8 @@ function Register() {
                     type="text"
                     placeholder="John Doe"
                     name="username"
+                    value={formData.username}
+                    autoComplete="name"
                     onChange={onChange}
                     className="w-full rounded-2xl border border-slate-200 bg-slate-50 py-3 pl-11 pr-4 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
                   />
@@ -82,6 +84,8 @@ function Register() {
                     type="email"
                     placeholder="john@example.com"
                     name="email"
+                    value={formData.email}
+                    autoComplete="email"
                     onChange={onChange}
                     className="w-full rounded-2xl border border-slate-200 bg-slate-50 py-3 pl-11 pr-4 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
                   />
@@ -95,6 +99,8 @@ function Register() {
                     type="text"
                     placeholder="modasa,gujarat"
                     name="address"
+                    value={formData.address}
+                    autoComplete="street-address"
                     onChange={onChange}
                     className="w-full rounded-2xl border border-slate-200 bg-slate-50 py-3 pl-11 pr-4 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
                   />
@@ -109,6 +115,8 @@ function Register() {
                     type="tel"
                     placeholder="+1 (555) 000-0000"
                     name="phone"
+                    value={formData.phone}
+                    autoComplete="tel"
                     onChange={onChange}
                     className="w-full rounded-2xl border border-slate-200 bg-slate-50 py-3 pl-11 pr-4 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
                   />
@@ -124,7 +132,9 @@ function Register() {
                       type="password"
                       placeholder="••••••••"
                       name="password"
-                      onChange={onChange} 
+                      value={formData.password}
+                      autoComplete="new-password"
+                      onChange={onChange}
                       className="w-full rounded-2xl border border-slate-200 bg-slate-50 py-3 pl-11 pr-4 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
                     />
                   </div>
@@ -137,6 +147,8 @@ function Register() {
                       type="password"
                       placeholder="••••••••"
                       name="confirmPassword"
+                      value={formData.confirmPassword}
+                      autoComplete="new-password"
                       onChange={onChange}
                       className="w-full rounded-2xl border border-slate-200 bg-slate-50 py-3 pl-11 pr-4 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
                     />

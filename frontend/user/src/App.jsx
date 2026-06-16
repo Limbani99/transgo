@@ -10,6 +10,12 @@ import Contact from './pages/Contact'
 import DashBoard from './pages/UserPages/DashBoard'
 import Shipment from './pages/UserPages/Shipment'
 import Tranpoter from './pages/UserPages/Tranpoter'
+import TrackingPage from './pages/UserPages/TrackingPage'
+import Payment from './pages/UserPages/Payment'
+import Notification from './pages/UserPages/Notification'
+import Profile from './pages/UserPages/Profile'
+import Support from './pages/UserPages/Support'
+
 function App() {
   return (
     <>
@@ -22,6 +28,11 @@ function App() {
           <Route path="/dashboard" element={<DashBoard />} />
           <Route path="/shipments" element={<Shipment />} />
           <Route path="/transporter" element={<Tranpoter />} />
+          <Route path="/tracking" element={<TrackingPage />} />
+          <Route path="/payments" element={<Payment />} />
+          <Route path="/notifications" element={<Notification />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/support" element={<Support />} />
         </Route>
 
         <Route path="/register" element={<Register />} />

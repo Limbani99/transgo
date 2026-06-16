@@ -8,14 +8,14 @@ function Sidebar() {
   const { isLoginedIn } = useData();
 
   const menuItems = [
-    { label: 'Dashboard', link: '/dashboard', icon: LayoutDashboard, active: true },
+    { label: 'Dashboard', link: '/dashboard', icon: LayoutDashboard },
     { label: 'Create Shipment', link: '/shipments', icon: PlusCircle },
     { label: 'My Shipments', link: '/transporter', icon: Package },
-    { label: 'Tracking', icon: MapPin },
-    { label: 'Payments', icon: CreditCard },
-    { label: 'Notifications', icon: Bell },
-    { label: 'Profile', icon: User },
-    { label: 'Support', icon: HelpCircle },
+    { label: 'Tracking', link: '/tracking', icon: MapPin },
+    { label: 'Payments',link:'/payments', icon: CreditCard },
+    { label: 'Notifications', link: '/notifications', icon: Bell },
+    { label: 'Profile', link: '/profile', icon: User },
+    { label: 'Support', link: '/support', icon: HelpCircle },
   ]
 
   return (
@@ -26,10 +26,21 @@ function Sidebar() {
             <nav className="space-y-1">
               {menuItems.map((item) => {
                 const Icon = item.icon
+                if (!item.link) {
+                  return (
+                    <button
+                      key={item.label}
+                      className="w-full flex items-center gap-3 py-2.5 px-4 rounded-xl text-xs font-semibold tracking-wide transition duration-150 text-left text-slate-500 hover:bg-slate-50 hover:text-slate-900 cursor-pointer"
+                    >
+                      <Icon className="w-4 h-4" />
+                      {item.label}
+                    </button>
+                  )
+                }
                 return (
                   <NavLink to={item.link}
                     key={item.label}
-                    className={`w-full flex items-center gap-3 py-2.5 px-4 rounded-xl text-xs font-semibold tracking-wide transition duration-150 text-left ${item.active
+                    className={({ isActive }) => `w-full flex items-center gap-3 py-2.5 px-4 rounded-xl text-xs font-semibold tracking-wide transition duration-150 text-left ${isActive
                       ? 'bg-blue-50/70 text-blue-600 border-l-4 border-blue-600 rounded-l-none pl-3'
                       : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'
                       }`}
