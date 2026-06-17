@@ -1,4 +1,4 @@
-import React from 'react'
+                                                                                                                                                                                                                                                                                                    import React from 'react'
 import Navbar from './Navbar'
 import Sidebar from './Sidebar'
 import Footer from './Footer'
@@ -28,4 +28,4 @@ function Layout() {
   )
 }
 
-export default Layout
+export default Layout
