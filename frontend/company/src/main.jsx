@@ -4,7 +4,8 @@ import './index.css'
 import App from './App.jsx'
 import { BrowserRouter } from "react-router-dom"
 import { DataProvider } from './context/DataProvider.jsx'
-import {Toaster} from 'react-hot-toast'
+import toast, { Toaster } from 'react-hot-toast'
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
