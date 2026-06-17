@@ -13,6 +13,8 @@ import Tracking from './pages/Tracking'
 import Payments from './pages/Payments'
 import Analytics from './pages/Analytics'
 import Settings from './pages/Settings'
+import Customers from './pages/Customers'
+import Vehicles from './pages/Vehicles'
 
 function App() {
   return (
@@ -30,6 +32,8 @@ function App() {
         <Route path="/payments" element={<Payments />} />
         <Route path="/analytics" element={<Analytics />} />
         <Route path="/settings" element={<Settings />} />
+        <Route path="/customers" element={<Customers />} />
+        <Route path="/vehicles" element={<Vehicles />} />
       </Route>
     </Routes>
   )
