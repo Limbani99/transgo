@@ -22,8 +22,8 @@ function Login() {
     e.preventDefault();
     console.log(formData);
     try {
-      const res = await axios.post('http://localhost:5000/api/users/login', formData);
-       const userData = res.data.user;
+      const res = await axios.post('http://localhost:5000/api/auth/login', formData);
+      const userData = res.data.user;
       const authToken = res.data.token;
       login(userData, authToken);
       console.log(res.data);

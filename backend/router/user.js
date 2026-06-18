@@ -1,6 +1,22 @@
 const express = require("express");
-const route = express.Router()
-const { } = require("../controllers/userController")
+const router = express.Router();
 
+const {
+    createShipment,
+    getAllShipments,
+    getShipmentById,
+    updateShipment,
+    deleteShipment,
+} = require("../controllers/userController/shipmentController");
 
-module.exports = route
+router.post("/", createShipment);
+
+router.get("/", getAllShipments);
+
+router.get("/:id", getShipmentById);
+
+router.put("/:id", updateShipment);
+
+router.delete("/:id", deleteShipment);
+
+module.exports = router;

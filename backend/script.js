@@ -10,8 +10,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
-app.use('/api/users', require('./router/common'));
-
+app.use('/api/auth', require('./router/common'));
+app.use('/api/user', require('./router/user'))
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)

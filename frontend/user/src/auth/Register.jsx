@@ -18,23 +18,24 @@ function Register() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   }
   const handleSubmit = async (e) => {
-  
+
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
       toast.error('Passwords do not match!');
       return;
     }
-    try{
-      const {confirmPassword,...userData} = formData; 
-   const res = await axios.post('http://localhost:5000/api/users/register', userData);
-   console.log(res.data);
-   toast.success('Registration successful!');
-   navigate('/login');
-    // Handle form submission logic here (e.g., send data to backend)
-  } catch (error) {
-    console.error('Registration error:', error);
-    toast.error('Registration failed!');
-  }}
+    try {
+      const { confirmPassword, ...userData } = formData;
+      const res = await axios.post('http://localhost:5000/api/auth/register', userData);
+      console.log(res.data);
+      toast.success('Registration successful!');
+      navigate('/login');
+      // Handle form submission logic here (e.g., send data to backend)
+    } catch (error) {
+      console.error('Registration error:', error);
+      toast.error('Registration failed!');
+    }
+  }
 
   return (
     <div className="min-h-screen bg-slate-100 py-8 px-4 sm:px-6 lg:px-8">
@@ -91,7 +92,7 @@ function Register() {
                   />
                 </div>
               </div>
-<div>
+              <div>
                 <label className="mb-2 block text-sm font-medium text-slate-700">Address</label>
                 <div className="relative">
                   <span className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">✉️</span>
