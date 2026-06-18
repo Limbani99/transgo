@@ -6,7 +6,12 @@ const CompanyLogin = () => {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
+    const res = await axios.post("http://localhost:3000/api/auth/company-login", {email, password})
+
+  };
   return (
     <div className="min-h-screen grid grid-cols-1 lg:grid-cols-2">
       {/* Left Column - Login Form */}
@@ -27,7 +32,7 @@ const CompanyLogin = () => {
             <h2 className="text-2xl font-bold text-slate-900 mb-2">Welcome Back</h2>
             <p className="text-slate-500 mb-8 text-sm">Sign in to your enterprise account to manage shipments.</p>
 
-            <form onSubmit={(e) => e.preventDefault()} className="space-y-5">
+            <form onSubmit={handleSubmit} className="space-y-5">
               <div>
                 <label className="block text-sm font-semibold text-slate-700 mb-2">Corporate Email</label>
                 <div className="relative">

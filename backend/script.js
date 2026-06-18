@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
-app.use('/api/users', require('./router/user'));
+app.use('/api/users', require('./router/common'));
 
 
 // Connect to MongoDB
