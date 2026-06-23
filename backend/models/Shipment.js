@@ -2,6 +2,11 @@ const mongoose = require("mongoose");
 
 const ShipmentSchema = new mongoose.Schema(
     {
+        companyId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
+            required: true
+        },
         pickupInformation: {
             address: {
                 type: String,

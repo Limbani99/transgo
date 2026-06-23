@@ -31,7 +31,7 @@ function Shipment() {
       </div>
 
       {/* Form and Preview Layout Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-8 items-start">
+      <form onSubmit={(e) => e.preventDefault()} className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-8 items-start">
         
         {/* Form card */}
         <div className="bg-white border border-slate-100 rounded-3xl p-6 md:p-8 shadow-sm space-y-8">
@@ -200,7 +200,7 @@ function Shipment() {
           </div>
         </div>
 
-      </div>
+      </form>
     </div>
   )
 }
