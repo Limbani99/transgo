@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const ShipmentSchema = new mongoose.Schema(
     {
-        companyId: {
+        userId: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",
             required: true

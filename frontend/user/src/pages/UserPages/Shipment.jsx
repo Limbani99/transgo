@@ -1,26 +1,86 @@
-import React from 'react'
-import { 
-  Plus, 
-  MapPin, 
-  Compass, 
-  ArrowDownCircle, 
-  Package, 
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useData } from '../../context/DataProvider'
+import {
+  Plus,
+  MapPin,
+  Compass,
+  ArrowDownCircle,
+  Package,
   Info,
   Ship
 } from 'lucide-react'
+import axios from 'axios'
 import shipmentMap from '../../assets/shipment_map.png'
 
 function Shipment() {
+  const navigate = useNavigate();
+  const { userData } = useData();
+  const [formdata, setfromdata] = useState({
+    pickupInformation: {
+      address: "",
+      personName: "",
+      phone: "",
+    },
+    deliveryInformation: {
+      address: "",
+      personName: "",
+      phone: "",
+    },
+    productInformation: {
+      productName: "",
+      productCategory: "",
+      productWeight: "",
+      quantity: "",
+      productDescription: "",
+    },
+  })
+  const handlechange = (section, field, value) => {
+    setfromdata((prev) => ({
+      ...prev,
+      [section]: {
+        ...prev[section],
+        [field]: value,
+      }
+    }))
+  }
+
+  const handlesubmit = async (e) => {
+    e.preventDefault();
+    if (!userData || !userData._id) {
+      alert("Please login first to create a shipment.");
+      navigate("/login");
+      return;
+    }
+    try {
+      const payload = {
+        ...formdata,
+        userId: userData._id
+      };
+      const res = await axios.post("http://localhost:5000/api/user/create-shipment", payload);
+      const data = res.data;
+      if (data.success) {
+        alert(data.message);
+        navigate("/transporter");
+      } else {
+        alert(data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      alert(error.response?.data?.message || "Something went wrong. Please check your fields.");
+    }
+  };
+
   return (
     <div className="space-y-8">
-      
+
       {/* Header block with stepper */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
           <h1 className="text-xl font-extrabold text-slate-900 tracking-tight">Create New Shipment</h1>
           <p className="text-slate-500 text-xs mt-1 font-medium">Configure your cargo details and choose shipping priority.</p>
         </div>
-        
+
         {/* Stepper capsule */}
         <div className="flex items-center gap-4 bg-white border border-slate-100 p-1.5 rounded-full text-[10px] font-bold text-slate-400 shadow-sm">
           <span className="bg-blue-600 text-white px-3 py-1 rounded-full">1 Details</span>
@@ -31,11 +91,11 @@ function Shipment() {
       </div>
 
       {/* Form and Preview Layout Grid */}
-      <form onSubmit={(e) => e.preventDefault()} className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-8 items-start">
-        
+      <form onSubmit={handlesubmit} className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-8 items-start">
+
         {/* Form card */}
         <div className="bg-white border border-slate-100 rounded-3xl p-6 md:p-8 shadow-sm space-y-8">
-          
+
           {/* Pickup Information */}
           <div>
             <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2 mb-6">
@@ -44,21 +104,27 @@ function Shipment() {
             </h3>
             <div className="space-y-4">
               <div>
-                <input 
-                  type="text" 
-                  placeholder="Address line 1" 
+                <input
+                  type="text"
+                  placeholder="Address line 1"
+                  value={formdata.pickupInformation.address}
+                  onChange={(e) => handlechange("pickupInformation", "address", e.target.value)}
                   className="w-full rounded-2xl border border-slate-200/80 px-4 py-3 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-150/50 bg-slate-50/20 transition"
                 />
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <input 
-                  type="text" 
-                  placeholder="Contact Person" 
+                <input
+                  type="text"
+                  placeholder="Contact Person"
+                  value={formdata.pickupInformation.personName}
+                  onChange={(e) => handlechange("pickupInformation", "personName", e.target.value)}
                   className="w-full rounded-2xl border border-slate-200/80 px-4 py-3 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-150/50 bg-slate-50/20 transition"
                 />
-                <input 
-                  type="text" 
-                  placeholder="Phone Number" 
+                <input
+                  type="text"
+                  placeholder="Phone Number"
+                  value={formdata.pickupInformation.phone}
+                  onChange={(e) => handlechange("pickupInformation", "phone", e.target.value)}
                   className="w-full rounded-2xl border border-slate-200/80 px-4 py-3 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-150/50 bg-slate-50/20 transition"
                 />
               </div>
@@ -73,21 +139,27 @@ function Shipment() {
             </h3>
             <div className="space-y-4">
               <div>
-                <input 
-                  type="text" 
-                  placeholder="Address line 1" 
+                <input
+                  type="text"
+                  value={formdata.deliveryInformation.address}
+                  placeholder="Address line 1"
+                  onChange={(e) => handlechange("deliveryInformation", "address", e.target.value)}
                   className="w-full rounded-2xl border border-slate-200/80 px-4 py-3 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-150/50 bg-slate-50/20 transition"
                 />
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <input 
-                  type="text" 
-                  placeholder="Receiver Name" 
+                <input
+                  type="text"
+                  value={formdata.deliveryInformation.personName}
+                  placeholder="Receiver Name"
+                  onChange={(e) => handlechange("deliveryInformation", "personName", e.target.value)}
                   className="w-full rounded-2xl border border-slate-200/80 px-4 py-3 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-150/50 bg-slate-50/20 transition"
                 />
-                <input 
-                  type="text" 
-                  placeholder="Phone Number" 
+                <input
+                  type="text"
+                  value={formdata.deliveryInformation.phone}
+                  placeholder="Phone Number"
+                  onChange={(e) => handlechange("deliveryInformation", "phone", e.target.value)}
                   className="w-full rounded-2xl border border-slate-200/80 px-4 py-3 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-150/50 bg-slate-50/20 transition"
                 />
               </div>
@@ -102,38 +174,47 @@ function Shipment() {
             </h3>
             <div className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-[0.8fr_1.2fr] gap-4">
-                <select 
-                  defaultValue=""
+                <select
+                  value={formdata.productInformation.productCategory}
+                  onChange={(e) => handlechange("productInformation", "productCategory", e.target.value)}
                   className="w-full rounded-2xl border border-slate-200/80 px-4 py-3 text-xs text-slate-800 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-150/50 bg-white transition"
                 >
-                  <option value="" disabled>Category</option>
+                  <option value="">Category</option>
                   <option value="electronics">Electronics</option>
                   <option value="industrial">Industrial Parts</option>
                   <option value="medical">Medical Supplies</option>
                   <option value="consumer">Consumer Goods</option>
                 </select>
-                <input 
-                  type="text" 
-                  placeholder="Product Name" 
+                <input
+                  type="text"
+                  placeholder="Product Name"
+                  value={formdata.productInformation.productName}
+                  onChange={(e) => handlechange("productInformation", "productName", e.target.value)}
                   className="w-full rounded-2xl border border-slate-200/80 px-4 py-3 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-150/50 bg-slate-50/20 transition"
                 />
               </div>
               <div>
-                <textarea 
-                  placeholder="Description" 
+                <textarea
+                  placeholder="Description"
                   rows={3}
+                  value={formdata.productInformation.productDescription}
+                  onChange={(e) => handlechange("productInformation", "productDescription", e.target.value)}
                   className="w-full rounded-2xl border border-slate-200/80 px-4 py-3 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-150/50 bg-slate-50/20 resize-none transition"
                 ></textarea>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <input 
-                  type="number" 
-                  placeholder="Weight (kg)" 
+                <input
+                  type="number"
+                  placeholder="Weight (kg)"
+                  value={formdata.productInformation.productWeight}
+                  onChange={(e) => handlechange("productInformation", "productWeight", e.target.value)}
                   className="w-full rounded-2xl border border-slate-200/80 px-4 py-3 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-150/50 bg-slate-50/20 transition"
                 />
-                <input 
-                  type="number" 
-                  placeholder="Quantity" 
+                <input
+                  type="number"
+                  placeholder="Quantity"
+                  value={formdata.productInformation.quantity}
+                  onChange={(e) => handlechange("productInformation", "quantity", e.target.value)}
                   className="w-full rounded-2xl border border-slate-200/80 px-4 py-3 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-150/50 bg-slate-50/20 transition"
                 />
               </div>
@@ -152,15 +233,15 @@ function Shipment() {
               </span>
             </div>
             <p className="text-[10px] text-slate-400 font-semibold leading-none mb-4">Estimated Distance: 1,420 km</p>
-            
+
             {/* Dotted map image with floating Ocean Freight overlay */}
             <div className="relative rounded-2xl overflow-hidden shadow-sm border border-slate-100/50">
-              <img 
-                src={shipmentMap} 
-                alt="Shipment Route map preview" 
-                className="w-full h-auto object-cover" 
+              <img
+                src={shipmentMap}
+                alt="Shipment Route map preview"
+                className="w-full h-auto object-cover"
               />
-              
+
               {/* Floating map overlay */}
               <div className="absolute left-1/2 -translate-x-1/2 bottom-4 bg-white/95 backdrop-blur shadow-lg border border-slate-100 p-4 rounded-2xl flex items-center gap-3 w-[85%] max-w-[260px]">
                 <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
@@ -178,7 +259,7 @@ function Shipment() {
           {/* Price summary calculation */}
           <div className="border-t border-slate-200/50 pt-6 space-y-6">
             <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Shipment Summary</p>
-            
+
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <p className="text-[9px] font-bold text-slate-400 tracking-wide uppercase leading-none">Estimated Cost</p>
@@ -197,6 +278,13 @@ function Shipment() {
                 Price includes Express Priority and Fragile Handling surcharges. Final price confirmed after company selection.
               </p>
             </div>
+            <button
+              type="submit"
+              className="w-full bg-blue-600 text-white py-3 rounded-2xl font-semibold hover:bg-blue-700 transition"
+            >
+              Create Shipment
+            </button>
+
           </div>
         </div>
 

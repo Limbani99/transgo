@@ -9,14 +9,14 @@ const {
     deleteShipment,
 } = require("../controllers/userController/shipmentController");
 
-router.post("/", createShipment);
+router.post("/create-shipment", createShipment);
 
-router.get("/", getAllShipments);
+router.get("/get-shipments", getAllShipments);
 
-router.get("/:id", getShipmentById);
+router.get("/get-shipment/:id", getShipmentById);
 
-router.put("/:id", updateShipment);
+router.put("/update-shipment/:id", updateShipment);
 
-router.delete("/:id", deleteShipment);
+router.delete("/delete-shipment/:id", deleteShipment);
 
 module.exports = router;
