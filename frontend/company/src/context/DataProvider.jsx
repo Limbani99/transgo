@@ -7,7 +7,8 @@ export const DataProvider = ({ children }) => {
   const [role, setRole] = useState(null);
   const [token, setToken] = useState(null);
   const [isLoginedIn, setIsLoggedIn] = useState(false);
-  
+  const [allshipment, setAllshipment] = useState([]);
+
   const login = (userData, authtoken) => {
     localStorage.setItem("token", authtoken);
     localStorage.setItem("user", JSON.stringify(userData));
@@ -55,6 +56,15 @@ export const DataProvider = ({ children }) => {
     return () => axios.interceptors.request.eject(interceptor);
   }, []);
 
+  const getAllshipment = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/api/company/get-shipments");
+      setAllshipment(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   const value = {
     userData,
     role,
@@ -62,6 +72,8 @@ export const DataProvider = ({ children }) => {
     login,
     logout,
     isLoginedIn,
+    getAllshipment,
+    allshipment
   };
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;

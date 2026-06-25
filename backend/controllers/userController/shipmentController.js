@@ -39,7 +39,7 @@ const getAllShipments = async (req, res) => {
 // Get Single Shipment
 const getShipmentById = async (req, res) => {
     try {
-        const shipment = await Shipment.findById(req.params.id);
+        const shipment = await Shipment.findById(req.params.id).populate("userId", "username email phone");
 
         if (!shipment) {
             return res.status(404).json({
